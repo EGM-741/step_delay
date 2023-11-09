@@ -33,7 +33,7 @@ void loop() {
     delay(500);
   }
   if (motor1_rate > 3) {M_move(motor1_1,motor1_2,-1);}
-  else if (motor1_rate < -3) {M_move(motor1_1,motor1_2, 1);}
+  else if (motor1_rate < 0) {M_move(motor1_1,motor1_2, 1);}
   
 }
 void motor1_interrupt()
