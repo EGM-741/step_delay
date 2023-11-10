@@ -1,4 +1,4 @@
-void M_move(byte motor_1,byte motor_2,signed direction)
+void M_move_directed(byte motor_1,byte motor_2,signed direction)
 {
     if (direction == 1)
     {
@@ -14,4 +14,8 @@ void M_move(byte motor_1,byte motor_2,signed direction)
         digitalWrite(motor_1,0);
         digitalWrite(motor_2,0);
     }
+}
+bool isDistanceGone(float rates, float distance)
+{
+    return (rates >= distance / 37.7);
 }

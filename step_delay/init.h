@@ -10,4 +10,6 @@ void initialize()
   pinMode(encod1_2, INPUT);
   pinMode(encod2_1, INPUT);
   pinMode(encod2_2, INPUT);
+  lcd.init();
+  lcd.backlight();
 }

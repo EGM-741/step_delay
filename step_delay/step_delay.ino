@@ -1,3 +1,4 @@
+#include "LiquidCrystal_I2C.h"
 #include "variables.h"
 #include "init.h"
 #include "motor_move.h"
@@ -13,28 +14,25 @@ void setup() {
 void loop() {
   if (start)
   {
-    M_move(motor2_1,motor2_2,1);
-    M_move(motor1_1,motor1_2,1);
+    M_move_directed(motor2_1,motor2_2,1);
+    M_move_directed(motor1_1,motor1_2,1);
     start = 0;
   }
-  float motor1_rate = interruptCounter1/7/14.5;
-  float motor2_rate = interruptCounter2/7/14.5;
-  Serial.print(motor1_rate);
-  Serial.println(motor2_rate);
+  float motor1_rate = interruptCounter1/7/14.5*1.15;
+  float motor2_rate = interruptCounter2/7/14.5*1.15;
   speed = 100;
   analogWrite(speedpin1, speed);
   analogWrite(speedpin2, speed);
-  if ((motor2_rate > 7.45 and motor2_rate < 7.55) or
-      (motor2_rate > 11.25 and motor2_rate < 11.35))
-  {
-    M_move(motor2_1,motor2_2,0);
-    delay(2000);
-    M_move(motor2_1,motor2_2,1);
-    delay(500);
-  }
-  if (motor1_rate > 3) {M_move(motor1_1,motor1_2,-1);}
-  else if (motor1_rate < 0) {M_move(motor1_1,motor1_2, 1);}
+  // if distance is not gone then motor moves
+  if (1-isDistanceGone(motor2_rate,18)) {M_move_directed(motor2_1,motor2_2,1);}
+  else {M_move_directed(motor2_1,motor2_2,0);}
+  if (motor1_rate > 3) {M_move_directed(motor1_1,motor1_2,-1);}
+  else if (motor1_rate < 0) {M_move_directed(motor1_1,motor1_2, 1);}
   
+  lcd.setCursor(0,0);
+  lcd.print(motor1_rate);
+  lcd.setCursor(0,1);
+  lcd.print(motor2_rate);
 }
 void motor1_interrupt()
 {

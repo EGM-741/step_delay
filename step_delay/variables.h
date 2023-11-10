@@ -13,3 +13,4 @@ byte acc = 1;
 bool start = 1;
 volatile long interruptCounter1 = 0;
 volatile long interruptCounter2 = 0;
+LiquidCrystal_I2C lcd(0x27,16,2);
