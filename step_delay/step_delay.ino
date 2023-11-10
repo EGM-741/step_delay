@@ -24,7 +24,7 @@ void loop() {
   analogWrite(speedpin1, speed);
   analogWrite(speedpin2, speed);
   // if distance is not gone then motor moves
-  if (1-isDistanceGone(motor2_rate,18)) {M_move_directed(motor2_1,motor2_2,1);}
+  if (1-isDistanceGone(motor2_rate,100)) {M_move_directed(motor2_1,motor2_2,1);}
   else {M_move_directed(motor2_1,motor2_2,0);}
   if (motor1_rate > 3) {M_move_directed(motor1_1,motor1_2,-1);}
   else if (motor1_rate < 0) {M_move_directed(motor1_1,motor1_2, 1);}
